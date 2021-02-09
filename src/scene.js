@@ -1,29 +1,38 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
 
+
+
 const scene = new THREE.Scene();
 const loader = new GLTFLoader();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-const cube = new THREE.Mesh(geometry, material);
 const peko = 'assets/peko.glb';
 
-const light = new THREE.AmbientLight( 0x404040 ); // soft white light
+
+// Fog
+const color = 0x333333;  // white
+const near = 7;
+const far = 15;
+scene.fog = new THREE.Fog(color, near, far);
+scene.background = new THREE.Color(color);
+
+
+// Lights
+const light = new THREE.PointLight( 0xffffff, 1, 100 );
+light.position.set( 50, 50, 50 );
 scene.add( light );
+const light2 = new THREE.PointLight( 0xfffffff, 1, 100 );
+light2.position.set( -50, 50, 50 );
+scene.add( light2 );
 
 let renderer;
 
-scene.add(cube);
-camera.position.z = 5;
+camera.position.z = 10;
 
 const animate = () => {
   requestAnimationFrame(animate);
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
   renderer.render(scene, camera);
 };
-
 
 loader.load(
 	peko,
