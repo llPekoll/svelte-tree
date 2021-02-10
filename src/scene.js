@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
+import {gsap} from 'gsap';
 
 
 
@@ -7,10 +8,10 @@ const scene = new THREE.Scene();
 const loader = new GLTFLoader();
 const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.z = 10;
+camera.position.x = 1;
 
 const peko = 'assets/peko.glb';
 const pekoTexture = 'assets/text_low.jpg';
-
 
 // Fog
 const color = 0x333333;  // white
@@ -38,8 +39,8 @@ const pointLightHelper = new THREE.PointLightHelper( light, sphereSize );
 const animate = () => {
 	light.position.x = 80 * Math.sin(-Date.now() / 500)-10;
 	light.position.z = 80 * Math.cos(-Date.now() / 500)-10;
-  requestAnimationFrame(animate);
-  renderer.render(scene, camera);
+  	requestAnimationFrame(animate);
+  	renderer.render(scene, camera);
 };
 
 
@@ -59,6 +60,7 @@ loader.load(
 		gltf.scenes; // Array<THREE.Group>
 		gltf.cameras; // Array<THREE.Camera>
 		gltf.asset; // Object
+
 		gltf.scene.children[0].name = "peko";
 		gltf.scene.children[0].children[0].material = pekoMat;
 		gltf.scene.children[0].children[0].position.set(0.087, -0.131, 0.000);
@@ -82,10 +84,15 @@ const resize = () => {
 
 export const createScene = (el) => {
   renderer = new THREE.WebGLRenderer({ antialias: true, canvas: el });
-
   resize();
   animate();
 }
+export const updadeFace = (num) => {
+	var pp = scene.getObjectByName( "peko", true );
+	gsap.to(pp.rotation, {y: -0.5, duration: 1,ease: "none"});
+
+}
+
 
 window.addEventListener('resize', resize);
 
