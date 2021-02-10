@@ -4,7 +4,7 @@
     import {gsap} from 'gsap';
     import { Swipe, SwipeItem } from "svelte-swipe";
     import Icon from 'svelte-awesome';
-    import { beer, refresh, comment, codeFork, camera, ban, timesCircle } from 'svelte-awesome/icons';
+    import { timesCircle } from 'svelte-awesome/icons';
 
 
     let title;
@@ -20,13 +20,6 @@
   onMount(() => {
     createScene(el)
   });
-    const swipeConfig = {
-    autoplay: false,
-    delay: 2000,
-    showIndicators: true,
-    transitionDuration: 1000,
-    defaultIndex: 0,
-  };
 
   const moveAll = (value)=>{
     if(isOut == false){
@@ -49,7 +42,6 @@
       if (index > -1) {
         objList.splice(index, 1);
       }
-      console.log(objList)
       objList.forEach(element => {
         gsap.to(element, {x: 0, duration: .3,ease: "none",onComplete:()=>{isOut=false}});
       });
