@@ -33,11 +33,11 @@ let renderer;
 
 const sphereSize = 1;
 const pointLightHelper = new THREE.PointLightHelper( light, sphereSize );
-scene.add( pointLightHelper );
+// scene.add( pointLightHelper );
 
 const animate = () => {
-	light.position.x = 90 * Math.sin(-Date.now() / 500)-10;
-	light.position.z = 90 * Math.cos(-Date.now() / 500)-10;
+	light.position.x = 80 * Math.sin(-Date.now() / 500)-10;
+	light.position.z = 80 * Math.cos(-Date.now() / 500)-10;
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
 };
