@@ -22,7 +22,8 @@ scene.background = new THREE.Color(color);
 
 // Lights
 const light = new THREE.PointLight( 0xffffff, 6, 100 );
-light.position.set( 50, 50, 50 );
+light.position.set( 50, 10, 50 );
+
 scene.add( light );
 const light2 = new THREE.PointLight( 0xfffffff, 4, 100 );
 light2.position.set( -50, 50, 50 );
@@ -30,16 +31,24 @@ scene.add( light2 );
 
 let renderer;
 
-
+const sphereSize = 1;
+const pointLightHelper = new THREE.PointLightHelper( light, sphereSize );
+scene.add( pointLightHelper );
 
 const animate = () => {
+	light.position.x = 90 * Math.sin(-Date.now() / 500)-10;
+	light.position.z = 90 * Math.cos(-Date.now() / 500)-10;
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
 };
 
 
 const texture = new THREE.TextureLoader().load( pekoTexture );
-const pekoMat = new THREE.MeshPhysicalMaterial({color: 'white',map:texture,wireframe:true});
+const pekoMat = new THREE.MeshPhysicalMaterial({color: 'white',
+map:texture,
+wireframe:true,
+roughness: 0.6,
+metalness: 0.0,});
 
 loader.load(
 	peko,
@@ -73,6 +82,7 @@ const resize = () => {
 
 export const createScene = (el) => {
   renderer = new THREE.WebGLRenderer({ antialias: true, canvas: el });
+
   resize();
   animate();
 }
