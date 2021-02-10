@@ -6,7 +6,7 @@
 
 
   let title;
-  const title_content = "|Yohann <br/> |Mepa";
+  const title_content = "|Mepa <br/> |Yohann";
   
   let el;
   onMount(() => {
@@ -41,11 +41,29 @@
   }
   .box{
     background-color: red;
+    float: left;
     height: 10px;
     width: 10px;
   }
   ol{
+    font-family: 'Roboto';
     list-style-type: none;
+  }
+  .header{
+    position: absolute; 
+    left: 0; 
+    top: 0; 
+    height: 70px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.7);
+  }
+  .footer{
+    position: absolute; 
+    left: 0; 
+    bottom:0; 
+    height: 70px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.7);
   }
 </style>
 <div id="wrapper">
@@ -55,6 +73,8 @@
     
 </div>
 <!-- https://jsfiddle.net/elvinmammadoff/bqrLkdsc/ -->
+<div class="header">
+</div>
 <div class="projects">
   <ol>
     <li>
@@ -68,5 +88,6 @@
     <li>Animation</li>
   </ol>
 </div>
-
+<div class="footer">
+</div>
 <canvas bind:this={el}></canvas>
