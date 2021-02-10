@@ -609,6 +609,11 @@ supports-color@^7.0.0:
   dependencies:
     has-flag "^4.0.0"
 
+svelte-swipe@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/svelte-swipe/-/svelte-swipe-1.7.2.tgz#e4d8986e7a624ae108569a9a3f242f2bfb042647"
+  integrity sha512-+jNeFxOVRl1CNBH0inYEvALP1zZ+FbHP/THMcI1gpbGdSwd/hVw3ogghWbHcU+EeHtmFAVdKbWZHBMre43kWHw==
+
 svelte@^3.0.0:
   version "3.32.2"
   resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.32.2.tgz#c3a370b951ea2e0730dfd314b5fa57fd93ece399"
