@@ -1,20 +1,21 @@
 <script>
-  import { onMount } from 'svelte';
-  import { createScene, updadeFace } from "./scene";
-  import {gsap} from 'gsap';
-  import { Swipe, SwipeItem } from "svelte-swipe";
-   import Icon from 'svelte-awesome';
-  import { beer, refresh, comment, codeFork, camera, ban, timesCircle } from 'svelte-awesome/icons';
+    import { onMount } from 'svelte';
+    import { createScene, updadeFace } from "./scene";
+    import {gsap} from 'gsap';
+    import { Swipe, SwipeItem } from "svelte-swipe";
+    import Icon from 'svelte-awesome';
+    import { beer, refresh, comment, codeFork, camera, ban, timesCircle } from 'svelte-awesome/icons';
 
 
-  let title;
-  let first;
-  let second;
-  let third;
-  let fourth;
-  let fifth;
-  const title_content = "|Mepa <br/> |Yohann";
-  
+    let title;
+    let isOut =false;
+    let first;
+    let second;
+    let third;
+    let fourth;
+    let fifth;
+    const title_content = "|Mepa <br/> |Yohann";
+    
   let el;
   onMount(() => {
     createScene(el)
@@ -26,37 +27,41 @@
     transitionDuration: 1000,
     defaultIndex: 0,
   };
-  	function handleMouseOver(e, value) {
-    // console.log(`mousehover ${value}`)
-	}
-	function handleMouseOut(e) {
-    // console.log(`mousehoverout${e}`)
-	}
+
   const moveAll = (value)=>{
-    let objList = [first, second, third, fourth, fifth]
-    const index = objList.indexOf(value);
-    if (index > -1) {
-      objList.splice(index, 1);
+    if(isOut == false){
+      let objList = [first, second, third, fourth, fifth]
+      const index = objList.indexOf(value);
+      if (index > -1) {
+        objList.splice(index, 1);
+      }
+      objList.forEach(element => {
+        gsap.to(element, {x: -100, duration: .3,ease: "none",onComplete:()=>{isOut=true}});
+      });
+      updadeFace(2)
     }
-    objList.forEach(element => {
-      gsap.to(element, {x: -600, duration: 1,ease: "none"});
-    });
-    updadeFace(2)
   }
   
   const resetMenu = (value)=>{
-    console.log("reste")
-    console.log(value)
-    let objList = [first, second, third, fourth, fifth]
-    const index = objList.indexOf(value);
-    if (index > -1) {
-      objList.splice(index, 1);
+    if(isOut == true){
+      let objList = [first, second, third, fourth, fifth]
+      const index = objList.indexOf(value);
+      if (index > -1) {
+        objList.splice(index, 1);
+      }
+      console.log(objList)
+      objList.forEach(element => {
+        gsap.to(element, {x: 0, duration: .3,ease: "none",onComplete:()=>{isOut=false}});
+      });
+      updadeFace(2)
+      ;
     }
-    console.log(objList)
-    objList.forEach(element => {
-      gsap.to(element, {x: 0, duration: 1,ease: "none"});
-    });
-    updadeFace(2)
+  }
+  const scaleUp = (val)=>{
+    gsap.to(val, {scaleX:1.2, scaleY:1.2, duration: .3,ease: "none"});
+  }
+  const scaleDown = (val)=>{
+    gsap.to(val, {scaleX:1, scaleY:1, duration: .3,ease: "none"});
   }
 </script>
 
@@ -122,8 +127,11 @@
     margin-left: -27px;
     color: lightgray;
   }
-  .grow { transition: all .1s ease-in-out; }
-  .grow:hover { transform: scale(1.2); }
+  .icon{
+    background-color: yellow;
+    width: 30px;
+    float: right;
+  }
 </style>
 
   <div bind:this={title} class="title">
@@ -134,10 +142,15 @@
 </div>
 <div class="projects">
   <ol>
-    <li class="grow" bind:this={first} on:click={()=>{moveAll(first)}}>
+    <li
+    bind:this={first} 
+    on:click={()=>{moveAll(first)}} 
+    on:mouseenter={()=>{scaleUp(first)}}
+	  on:mouseleave={()=>{scaleDown(first)}}
+    >
     <div class="box" >
       <div class="icon" bind:this={first} on:click={()=>{resetMenu(first)}}>
-        <Icon data={timesCircle} scale="2" style="margin-left:10px"/>
+        <Icon data={timesCircle} scale="2"/>
       </div>
     </div>
     <div class="numbers">01.</div>
@@ -145,30 +158,58 @@
     <div class="subjects">Tipsmeee</div>
       
     </li>
-    <li class="grow" bind:this={second} on:click={()=>{moveAll(second)}}>
+    <li
+    bind:this={second} 
+    on:click={()=>{moveAll(second)}} 
+    on:mouseenter={()=>{scaleUp(second)}}
+	  on:mouseleave={()=>{scaleDown(second)}}
+    >
         <div class="box">
-          <Icon data={timesCircle} scale="2" style="margin-left:10px"/>
+      <div class="icon" bind:this={second} on:click={()=>{resetMenu(second)}}>
+          <Icon data={timesCircle} scale="2"/>
+        </div>
         </div>
     <div class="numbers">02.</div>
     <div class="subjects">Rolex</div>
     </li>
-    <li class="grow" bind:this={third} on:click={()=>{moveAll(third)}}>
+    <li
+    bind:this={third} 
+    on:click={()=>{moveAll(third)}} 
+    on:mouseenter={()=>{scaleUp(third)}}
+	  on:mouseleave={()=>{scaleDown(third)}}
+    >
         <div class="box">
-          <Icon data={timesCircle} scale="2" style="margin-left:10px"/>
+      <div class="icon" bind:this={third} on:click={()=>{resetMenu(third)}}>
+          <Icon data={timesCircle} scale="2"/>
+        </div>
         </div>
         <div class="numbers">03.</div>
     <div class="subjects">Augment</div>
     </li>
-    <li class="grow" bind:this={fourth} on:click={()=>{moveAll(fourth)}}>
+    <li
+    bind:this={fourth} 
+    on:click={()=>{moveAll(fourth)}} 
+    on:mouseenter={()=>{scaleUp(fourth)}}
+	  on:mouseleave={()=>{scaleDown(fourth)}}
+    >
         <div class="box">
-          <Icon data={timesCircle} scale="2" style="margin-left:10px"/>
+      <div class="icon" bind:this={fourth} on:click={()=>{resetMenu(fourth)}}>
+          <Icon data={timesCircle} scale="2"/>
+        </div>
         </div>
         <div class="numbers">04.</div>
     <div class="subjects">Light-up</div>
     </li>
-    <li class="grow" bind:this={fifth} on:click={()=>{moveAll(fifth)}}>
+    <li
+    bind:this={fifth} 
+    on:click={()=>{moveAll(fifth)}} 
+    on:mouseenter={()=>{scaleUp(fifth)}}
+	  on:mouseleave={()=>{scaleDown(fifth)}}
+    >
     <div class="box">
-      <Icon data={timesCircle} scale="2" style="margin-left:10px"/>
+      <div class="icon" bind:this={fifth} on:click={()=>{resetMenu(fifth)}}>
+      <Icon data={timesCircle} scale="2"/>
+    </div>
     </div>
         <div class="numbers">05.</div>
     <div class="subjects">Animation</div>
