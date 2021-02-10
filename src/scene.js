@@ -9,6 +9,7 @@ const loader = new GLTFLoader();
 const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.z = 10;
 camera.position.x = 1;
+gsap.to(camera.position, {y: -.2, repeat:-1, yoyo:true, duration: 3,ease: "sine"});
 
 const peko = 'assets/peko.glb';
 const pekoTexture = 'assets/text_low.jpg';
