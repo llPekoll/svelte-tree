@@ -5,34 +5,41 @@ import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
 
 const scene = new THREE.Scene();
 const loader = new GLTFLoader();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.z = 10;
+
 const peko = 'assets/peko.glb';
+const pekoTexture = 'assets/text_low.jpg';
 
 
 // Fog
 const color = 0x333333;  // white
-const near = 7;
-const far = 15;
+const near = 6;
+const far = 12;
 scene.fog = new THREE.Fog(color, near, far);
 scene.background = new THREE.Color(color);
 
 
 // Lights
-const light = new THREE.PointLight( 0xffffff, 1, 100 );
+const light = new THREE.PointLight( 0xffffff, 6, 100 );
 light.position.set( 50, 50, 50 );
 scene.add( light );
-const light2 = new THREE.PointLight( 0xfffffff, 1, 100 );
+const light2 = new THREE.PointLight( 0xfffffff, 4, 100 );
 light2.position.set( -50, 50, 50 );
 scene.add( light2 );
 
 let renderer;
 
-camera.position.z = 10;
+
 
 const animate = () => {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
 };
+
+
+const texture = new THREE.TextureLoader().load( pekoTexture );
+const pekoMat = new THREE.MeshPhysicalMaterial({color: 'white',map:texture,wireframe:true});
 
 loader.load(
 	peko,
@@ -43,6 +50,10 @@ loader.load(
 		gltf.scenes; // Array<THREE.Group>
 		gltf.cameras; // Array<THREE.Camera>
 		gltf.asset; // Object
+		gltf.scene.children[0].name = "peko";
+		gltf.scene.children[0].children[0].material = pekoMat;
+		gltf.scene.children[0].children[0].position.set(0.087, -0.131, 0.000);
+		gltf.scene.children[0].children[0].rotation.set(-.7,0.6,0);
 
 	},
 	function ( xhr ) {
@@ -67,3 +78,4 @@ export const createScene = (el) => {
 }
 
 window.addEventListener('resize', resize);
+
