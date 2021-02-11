@@ -50,7 +50,7 @@
         objList.forEach(element => {
           gsap.to(element, {x: -1000, duration: .3,ease: "none",onComplete:()=>{isOut=true}});
         });
-          gsap.to(value, {x: 150,y: -20,scaleX: 2,scaleY: 2, duration: .3,ease: "none",});
+          gsap.to(value, {x: 150,y: -20,scaleX: 2,scaleY: 2, duration: .3,ease: "sine"});
         // gsap.to(value, {y: -20, duration: .3,ease: "none",});
         // gsap.to(value, {x: 150, duration: 1,ease: "none",});
       }
@@ -64,7 +64,7 @@
   }
   const scaleUp = (val)=>{
     if(!isOut){
-      gsap.to(val, {scaleX:1.2, scaleY:1.2, duration: .3,ease: "none"});
+      gsap.to(val, {scaleX:1.3, scaleY:1.3, duration: .3,ease: "none"});
     }
   }
   const scaleDown = (val)=>{
@@ -83,7 +83,7 @@
     position: absolute; 
     color:grey;
     left: 15%; 
-    top: 20%; 
+    top: 12%; 
     width:200px; 
     height:100px; 
   }
@@ -121,7 +121,7 @@
     position: absolute; 
     left: 0; 
     bottom:0; 
-    height: 70px;
+    height: 50px;
     width: 100%;
     background-color: rgba(0,0,0,0.7);
   }
