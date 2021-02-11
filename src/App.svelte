@@ -16,8 +16,17 @@
     let fourth;
     let fifth;
     const title_content = "|Mepa <br/> |Yohann";
+    const img01 = 'assets/img/tps.jpg';
+    const img02 = 'assets/img/rolex.jpg';
+    const img03 = 'assets/img/agt.jpg';
+    const img04 = 'assets/img/ar.jpg';
+    const img05 = 'assets/img/jv.jpg';
 
-    let text1 = ["jose martins", "<br/> mdr bonjour ca va marfsda lorem epsilinsdf<br/> fasdijf[osgjdo fjgdsfujuj comme <br/>"]
+    let text1 = ["Tipsmeee", "Tipsmeee is a cloud web app in the Finetech industry, as a CTO, I had to build the project from scratch starting by the architecture of the project, the functional analysis, the documentation, the development, code review, and deployment on the cloud.Tipsmeee is as well embeded in other website.Tipsmeee is a Multilang Website, an Inboard module for more than 10 countries, each user has a dedicated payment page, it can handle more than 10 currencies, as a dasboard, it as a group feature for spread the money to multiple users and much more."]
+    let text2 = ["FixStudio", "Pipeline Creation for Swatch rendering in 3D. Transform a database made for construction to a database made for 3D rendering, Functional analysis with the Rolex team, Business trip, Developpement of the core app, lead of a small team, Documentation, Code Review, Tool development (etc... interactive 3D visualization and builder)."]
+    let text3 = ["Augment", "3D Plugin & R&D for Virtual Reality/Augmented Reality, were my tasks. Augment is a 3D application for 3D Artist.Since Artists can use different software, I had to develop and maintain plugins for various 3D software, that was done in python mostly. Plus some virtual reality apps, using HTC Vive and Hololens, that was done in Unity3D/C# and Unreal/C++."]
+    let text4 = ["Light-up Studio", "Full conception of Augmented reality instalations, Design, crafting direction, and software and software development, C++(OpenFrameWorks), most instalations were using kinect detection."]
+    let text5 = ["Animation", "Yohann Mepa In Animation, Working on Animations Projects"]
     
   let el;
   onMount(() => {
@@ -128,10 +137,12 @@
     color: lightgray;
   }
   .icon{
-    background-color: yellow;
     width: 30px;
     float: right;
+    margin-top: -10px;
+    margin-right: -10px;
   }
+
 </style>
 
   <div bind:this={title} class="title">
@@ -148,7 +159,7 @@
     on:mouseenter={()=>{scaleUp(first)}}
 	  on:mouseleave={()=>{scaleDown(first)}}
     >
-    <div class="box" >
+    <div class="box" style="background-image: url('{img01}');background-size: cover;">
       <div class="icon" bind:this={first} on:click={()=>{resetMenu(first)}}>
         <Icon data={timesCircle} scale="2"/>
       </div>
@@ -164,13 +175,14 @@
     on:mouseenter={()=>{scaleUp(second)}}
 	  on:mouseleave={()=>{scaleDown(second)}}
     >
-        <div class="box">
+        <div class="box" style="background-image: url('{img02}');background-size: cover;">
       <div class="icon" bind:this={second} on:click={()=>{resetMenu(second)}}>
           <Icon data={timesCircle} scale="2"/>
         </div>
         </div>
     <div class="numbers">02.</div>
     <div class="subjects">Rolex</div>
+    <Trans text={text2} bind:show={isOut} />
     </li>
     <li
     bind:this={third} 
@@ -178,13 +190,14 @@
     on:mouseenter={()=>{scaleUp(third)}}
 	  on:mouseleave={()=>{scaleDown(third)}}
     >
-        <div class="box">
+        <div class="box" style="background-image: url('{img03}');background-size: cover;">
       <div class="icon" bind:this={third} on:click={()=>{resetMenu(third)}}>
           <Icon data={timesCircle} scale="2"/>
         </div>
         </div>
         <div class="numbers">03.</div>
     <div class="subjects">Augment</div>
+    <Trans text={text3} bind:show={isOut} />
     </li>
     <li
     bind:this={fourth} 
@@ -192,13 +205,14 @@
     on:mouseenter={()=>{scaleUp(fourth)}}
 	  on:mouseleave={()=>{scaleDown(fourth)}}
     >
-        <div class="box">
+        <div class="box" style="background-image: url('{img04}');background-size: cover;">
       <div class="icon" bind:this={fourth} on:click={()=>{resetMenu(fourth)}}>
           <Icon data={timesCircle} scale="2"/>
         </div>
         </div>
         <div class="numbers">04.</div>
     <div class="subjects">Light-up</div>
+    <Trans text={text4} bind:show={isOut} />
     </li>
     <li
     bind:this={fifth} 
@@ -206,13 +220,14 @@
     on:mouseenter={()=>{scaleUp(fifth)}}
 	  on:mouseleave={()=>{scaleDown(fifth)}}
     >
-    <div class="box">
+    <div class="box" style="background-image: url('{img05}');background-size: cover;">
       <div class="icon" bind:this={fifth} on:click={()=>{resetMenu(fifth)}}>
       <Icon data={timesCircle} scale="2"/>
     </div>
     </div>
         <div class="numbers">05.</div>
     <div class="subjects">Animation</div>
+    <Trans text={text5} bind:show={isOut} />
     </li>
   </ol>
 </div>

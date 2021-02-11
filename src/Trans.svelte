@@ -24,11 +24,11 @@
 </script>
 
 {#if show}
-	<div>
-		<span class="header" transition:swipe>{@html text[0]}</span>
+	<div class="header-div">
+		<p class="header" transition:swipe>{@html text[0]}</p>
 	</div>
-	<div>
-		<span class="text" transition:swipe>{@html text[1]}</span>
+	<div class="text-div">
+		<p class="text" transition:swipe>{@html text[1]}</p>
 	</div>
 {/if}
 
@@ -41,6 +41,16 @@
 		color: #ff3e00;
 	}
 	.text {
-		color: #1f5389;
+        color: #1f5389;
+        font-size: 10px;
+        line-height: .8
+	}
+	.header-div {
+		color: #ff3e00;
+        width: 30%;
+	}
+	.text-div {
+        color: #1f5389;
+        width: 30%;
 	}
 </style>
