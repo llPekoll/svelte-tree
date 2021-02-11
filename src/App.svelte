@@ -5,6 +5,7 @@
     import { Swipe, SwipeItem } from "svelte-swipe";
     import Icon from 'svelte-awesome';
     import { timesCircle } from 'svelte-awesome/icons';
+    import Trans from './Trans.svelte'
 
 
     let title;
@@ -15,45 +16,51 @@
     let fourth;
     let fifth;
     const title_content = "|Mepa <br/> |Yohann";
+
+    let text1 = ["jose martins", "<br/> mdr bonjour ca va marfsda lorem epsilinsdf<br/> fasdijf[osgjdo fjgdsfujuj comme <br/>"]
     
   let el;
   onMount(() => {
     createScene(el)
   });
 
+    const setMenu = (value, factor)=>{
+      let objList = [first, second, third, fourth, fifth]
+      if(isOut){
+        gsap.to(value, {scaleX: 1,scaleY: 1, duration: .3,ease: "none",});
+        objList.forEach(element => {
+          gsap.to(element, {x: 0, y: 0, duration: .3,ease: "none",onComplete:()=>{isOut=false}});
+        });
+        ;
+      }
+      else{
+        const index = objList.indexOf(value);
+        if (index > -1) {
+          objList.splice(index, 1);
+        }
+        objList.forEach(element => {
+          gsap.to(element, {x: -1000, duration: .3,ease: "none",onComplete:()=>{isOut=true}});
+        });
+        gsap.to(value, {x: 150,y: -20, duration: .3,ease: "none",});
+        gsap.to(value, {scaleX: 2,scaleY: 2, duration: .3,ease: "none",});
+      }
+        updadeFace(2)
+    }
   const moveAll = (value)=>{
-    if(isOut == false){
-      let objList = [first, second, third, fourth, fifth]
-      const index = objList.indexOf(value);
-      if (index > -1) {
-        objList.splice(index, 1);
-      }
-      objList.forEach(element => {
-        gsap.to(element, {x: -100, duration: .3,ease: "none",onComplete:()=>{isOut=true}});
-      });
-      updadeFace(2)
-    }
+    setMenu(value, 'set')
   }
-  
   const resetMenu = (value)=>{
-    if(isOut == true){
-      let objList = [first, second, third, fourth, fifth]
-      const index = objList.indexOf(value);
-      if (index > -1) {
-        objList.splice(index, 1);
-      }
-      objList.forEach(element => {
-        gsap.to(element, {x: 0, duration: .3,ease: "none",onComplete:()=>{isOut=false}});
-      });
-      updadeFace(2)
-      ;
-    }
+    setMenu(value, 'unset')
   }
   const scaleUp = (val)=>{
-    gsap.to(val, {scaleX:1.2, scaleY:1.2, duration: .3,ease: "none"});
+    if(!isOut){
+      gsap.to(val, {scaleX:1.2, scaleY:1.2, duration: .3,ease: "none"});
+    }
   }
   const scaleDown = (val)=>{
-    gsap.to(val, {scaleX:1, scaleY:1, duration: .3,ease: "none"});
+    if(!isOut){
+      gsap.to(val, {scaleX:1, scaleY:1, duration: .3,ease: "none"});
+    }
   }
 </script>
 
@@ -148,7 +155,7 @@
     <div class="numbers">01.</div>
     
     <div class="subjects">Tipsmeee</div>
-      
+      <Trans text={text1} bind:show={isOut} />
     </li>
     <li
     bind:this={second} 
