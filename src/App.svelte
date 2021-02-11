@@ -41,8 +41,9 @@
         objList.forEach(element => {
           gsap.to(element, {x: -1000, duration: .3,ease: "none",onComplete:()=>{isOut=true}});
         });
-        gsap.to(value, {x: 150,y: -20, duration: .3,ease: "none",});
-        gsap.to(value, {scaleX: 2,scaleY: 2, duration: .3,ease: "none",});
+          gsap.to(value, {x: 150,y: -20,scaleX: 2,scaleY: 2, duration: .3,ease: "none",});
+        // gsap.to(value, {y: -20, duration: .3,ease: "none",});
+        // gsap.to(value, {x: 150, duration: 1,ease: "none",});
       }
         updadeFace(2)
     }
