@@ -1,9 +1,18 @@
 <script>
     import ListElement from './ListElement.svelte'
-    import Description from './Description.svelte'
     import {  UpdadeFace } from "./scene";
     import {gsap} from 'gsap';
+    import { createEventDispatcher } from 'svelte';
 
+	const dispatch = createEventDispatcher();
+
+	function UpdateAnimation(elt, inAndOut) {
+        console.log("animation update")
+        console.log(elt)
+		dispatch('message', {
+			text: 'Hello!'
+		});
+	}
 
     let isOut =false;
     let first;
@@ -38,29 +47,20 @@
           gsap.to(element, {x: 0, y: 0, duration: .3,ease: "sine",onComplete:()=>{isOut=false}});
         });
         ;
+          UpdateAnimation(value, "out")
       }
       else{
-          console.log("objList")
-          console.log(objList)
         const index = objList.indexOf(value);
-            console.log("index")
-            console.log(index)
         if (index > -1) {
             objList.splice(index, 1);
         }
-        console.log("objList")
-        console.log(objList)
         objList.forEach(element => {
-            console.log("element")
-            console.log(element)
-          gsap.to(element, {x: -800, duration: .3,ease: "sine",onComplete:()=>{isOut=true}});
+          gsap.to(element, {x: -200, opacity:0, duration: .4,ease: "sine",onComplete:()=>{isOut=true}});
         });
-        console.log("value");
-        console.log(value);
-        gsap.to(value, {x: -50, scaleX:1, scaleY:1, duration: .3,ease: "sine",onComplete:()=>{isOut=true}});
-
+        gsap.to(value, {x: -130, scaleX:1, scaleY:1, duration: .5,ease: "sine", delay:.1, onComplete:()=>{isOut=true}});
       }
         UpdadeFace(2)
+        UpdateAnimation(value, "in")
     }
   const moveAll = (value)=>{
     setMenu(value, 'set')
@@ -88,8 +88,7 @@ li
     z-index: -1
     // &:hover 
     //     background-color: yellow
-.description
-    display: none
+
 </style>
 
 <ol>
@@ -101,7 +100,6 @@ li
         >
         <ListElement elt={objList[i]} {isOut} {text} {img}/>
         <div class="description">
-            <Description elt={objList[i]} />
         </div>
         </li>
     {/each}

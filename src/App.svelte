@@ -2,16 +2,20 @@
     import { onMount } from 'svelte';
     import { createScene } from "./scene";
     import Ol from './Ol.svelte'
+    import Description from './Description.svelte'
+    import {gsap} from 'gsap';
+
 
     const title_content = "|<br/>|Mepa <br/> |Yohann";
     let title;
-
+    let desc;
     let el;
     onMount(() => {
         createScene(el)
     });
-
-
+	function handleMessage(event) {
+        gsap.to(desc, {x: -180,y:-140, scaleX:.8, scaleY:.8, opacity: 1, duration: .6,delay:.1, ease: "expo"});
+	}
 </script>
 
 <style lang="sass">
@@ -59,8 +63,13 @@ section
 .projects
     margin-top: 120px
     margin-left: 120px
-</style>
+.desc
+    position: absolute
+    top: 176px
+    left: 400px
+    opacity: 0
 
+</style>
 
 
 <section>
@@ -70,7 +79,10 @@ section
   <div class="header">
 </div>
 <div class="projects">
-<Ol />
+<Ol on:message={handleMessage}/>
+<div class="desc" bind:this={desc}>
+    <Description  elt={"mmd"} />
+</div>
 </div>
 <div class="footer">
 Mepa Yohann all right reserved
