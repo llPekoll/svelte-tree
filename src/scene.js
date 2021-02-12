@@ -88,7 +88,7 @@ export const createScene = (el) => {
   resize();
   animate();
 }
-export const updadeFace = (num) => {
+export const UpdadeFace = (num) => {
 	var pp = scene.getObjectByName( "peko", true );
 	gsap.to(pp.rotation, {y: -0.5,z:0.3, duration: 1,ease: "sine"});
 	gsap.to(pp.position, {y: -1,x:-1, duration: 1,ease: "sine"});

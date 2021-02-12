@@ -39,6 +39,9 @@
     float: right
     margin-top: -10px
     margin-right: -10px
+
+.tittle
+    padding-top: 6px
 </style>
 
 
@@ -47,6 +50,9 @@
       <Icon data={timesCircle} scale="2"/>
     </div>
 </div>
-<div class="numbers">{text[0]}</div>
-<div class="subjects">{text[1]}</div>
+<div class="tittle">
+    <br />
+    <div class="numbers">{text[0]}</div>
+    <div class="subjects">{text[1]}</div>
+</div>
 <Trans text={text[2]} bind:show={isOut} />
