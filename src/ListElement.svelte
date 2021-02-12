@@ -27,7 +27,7 @@
     font-weight: 900
     color: darkgreen
     display: inline
-    font-size: 30px
+    font-size: 37px
   
 .subjects
     display: inline
@@ -40,19 +40,19 @@
     margin-top: -10px
     margin-right: -10px
 
-.tittle
-    padding-top: 6px
+// .tittle
+//     padding-top: 0px
 </style>
 
 
 <div class="box" style="background-image: url('{img}');background-size: cover;">
-      <div class="icon" bind:this={elt}>
+    <!-- <div class="icon" bind:this={elt}>
       <Icon data={timesCircle} scale="2"/>
-    </div>
+    </div> -->
 </div>
 <div class="tittle">
     <br />
     <div class="numbers">{text[0]}</div>
     <div class="subjects">{text[1]}</div>
 </div>
-<Trans text={text[2]} bind:show={isOut} />
+<!-- <Trans text={text[2]} bind:show={isOut} /> -->

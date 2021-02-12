@@ -1,5 +1,6 @@
 <script>
     import ListElement from './ListElement.svelte'
+    import Description from './Description.svelte'
     import {  UpdadeFace } from "./scene";
     import {gsap} from 'gsap';
 
@@ -10,6 +11,7 @@
     let third;
     let fourth;
     let fifth;
+    let objList = [first, second, third, fourth, fifth]
 
     const img1 = 'assets/img/tps.jpg';
     const img2 = 'assets/img/rolex.jpg';
@@ -23,14 +25,13 @@
     const text4 = [".04","Light-up",["Light-up Studio", "Full conception of Augmented reality instalations, Design, crafting direction, and software and software development, C++(OpenFrameWorks), most instalations were using kinect detection."]]
     const text5 = [".05","Animation",["Animation", "Yohann Mepa In Animation, Working on Animations Projects"]]
     let packs = [
-        { text: text1, img: img1, elt:first},
-        { text: text2, img: img2, elt:second},
-        { text: text3, img: img3, elt:third},
-        { text: text4, img: img4, elt:fourth},
-        { text: text5, img: img5, elt:fifth},
+        { text: text1, img: img1 },
+        { text: text2, img: img2 },
+        { text: text3, img: img3 },
+        { text: text4, img: img4 },
+        { text: text5, img: img5 },
     ];
         const setMenu = (value, factor)=>{
-      let objList = [first, second, third, fourth, fifth]
       if(isOut){
         gsap.to(value, {scaleX: 1,scaleY: 1, duration: .3,ease: "sine",});
         objList.forEach(element => {
@@ -39,22 +40,31 @@
         ;
       }
       else{
+          console.log("objList")
+          console.log(objList)
         const index = objList.indexOf(value);
+            console.log("index")
+            console.log(index)
         if (index > -1) {
-          objList.splice(index, 1);
+            objList.splice(index, 1);
         }
+        console.log("objList")
+        console.log(objList)
         objList.forEach(element => {
-          gsap.to(element, {x: -1000, duration: .3,ease: "sine",onComplete:()=>{isOut=true}});
+            console.log("element")
+            console.log(element)
+          gsap.to(element, {x: -800, duration: .3,ease: "sine",onComplete:()=>{isOut=true}});
         });
-          gsap.set(value, {xPercent:0, yPercent:0, left:0,y:0})
-          var h = window.innerHeight/4
-          var w = window.innerWidth/3
-          gsap.to(value, {x: w,y: h,scaleX: 2,scaleY: 2, duration: .3,ease: "sine"});
+        console.log("value");
+        console.log(value);
+        gsap.to(value, {x: -50, scaleX:1, scaleY:1, duration: .3,ease: "sine",onComplete:()=>{isOut=true}});
+
       }
-        updadeFace(2)
+        UpdadeFace(2)
     }
   const moveAll = (value)=>{
     setMenu(value, 'set')
+
   }
   const resetMenu = (value)=>{
     setMenu(value, 'unset')
@@ -71,16 +81,28 @@
 ol
     padding-top: 10%
     padding-bottom: -10%
+li
+    list-style: none
+    font-family: 'Roboto'
+    width: 35%
+    z-index: -1
+    // &:hover 
+    //     background-color: yellow
+.description
+    display: none
 </style>
 
 <ol>
-    {#each packs as { text, img, elt }, i}
-        <li bind:this={elt}
-        on:click={()=>{moveAll(elt)}} 
-        on:mouseenter={()=>{scaleMenu(elt,"up")}}
-        on:mouseleave={()=>{scaleMenu(elt,"down")}}
+    {#each packs as { text, img }, i}
+        <li bind:this={objList[i]}
+        on:click={()=>{moveAll(objList[i])}} 
+        on:mouseenter={()=>{scaleMenu(objList[i],"up")}}
+        on:mouseleave={()=>{scaleMenu(objList[i],"down")}}
         >
-        <ListElement {elt} isOut={isOut} {text} {img}/>
+        <ListElement elt={objList[i]} {isOut} {text} {img}/>
+        <div class="description">
+            <Description elt={objList[i]} />
+        </div>
         </li>
     {/each}
 </ol>
