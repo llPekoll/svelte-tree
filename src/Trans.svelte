@@ -16,7 +16,6 @@
                     const u =t -0.5;
                     const percentage = 200 * u
                     return `width:100px; height:100px; background: linear-gradient(to right, transparent 0,${percentage}%, ${color} ${percentage}%); color: ${color}`
-
                 }
             }
         }
