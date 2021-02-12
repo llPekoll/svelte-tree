@@ -3,7 +3,6 @@ import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
 import {gsap} from 'gsap';
 
 
-
 const scene = new THREE.Scene();
 const loader = new GLTFLoader();
 const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 1000);
