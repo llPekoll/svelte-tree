@@ -4,23 +4,25 @@
     import Ol from './Ol.svelte'
     import Description from './Description.svelte'
     import {gsap} from 'gsap';
-
+    import Icon from 'svelte-awesome';
+    import { timesCircle } from 'svelte-awesome/icons';
 
     const title_content = "|<br/>|Mepa <br/> |Yohann";
     let title;
     let desc;
     let el;
+    let elt
     onMount(() => {
         createScene(el)
     });
 	function handleMessage(event) {
         gsap.to(desc, {x: -180,y:-140, scaleX:.8, scaleY:.8, opacity: 1, duration: .6,delay:.1, ease: "expo"});
+        elt = event.detail.text
 	}
 </script>
 
 <style lang="sass">
 .title
-    font-family: 'Roboto'
     font-size: 44px
     font-weight: 100
     line-height: 0.8
@@ -31,7 +33,6 @@
     width: 200px 
     height: 100px 
 ol
-    font-family: 'Roboto'
     list-style-type: none
     width: 230px
 li
@@ -69,6 +70,8 @@ section
     left: 400px
     opacity: 0
 
+.icon
+    float: right
 </style>
 
 
@@ -81,7 +84,10 @@ section
 <div class="projects">
 <Ol on:message={handleMessage}/>
 <div class="desc" bind:this={desc}>
-    <Description  elt={"mmd"} />
+   <div class="icon">
+      <Icon data={timesCircle} scale="2"/>
+    </div>
+    <Description  {elt} />
 </div>
 </div>
 <div class="footer">

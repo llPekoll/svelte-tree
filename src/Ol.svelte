@@ -10,7 +10,7 @@
         console.log("animation update")
         console.log(elt)
 		dispatch('message', {
-			text: 'Hello!'
+			text: elt
 		});
 	}
 
@@ -28,11 +28,23 @@
     const img4 = 'assets/img/ar.jpg';
     const img5 = 'assets/img/jv.jpg';
 
-    const text1 = [".01","Tipsmeee",["Tipsmeee", "Tipsmeee is a cloud web app in the Finetech industry, as a CTO, I had to build the project from scratch starting by the architecture of the project, the functional analysis, the documentation, the development, code review, and deployment on the cloud.Tipsmeee is as well embeded in other website.Tipsmeee is a Multilang Website, an Inboard module for more than 10 countries, each user has a dedicated payment page, it can handle more than 10 currencies, as a dasboard, it as a group feature for spread the money to multiple users and much more."]]
-    const text2 = [".02","FixStudio",["FixStudio", "Pipeline Creation for Swatch rendering in 3D. Transform a database made for construction to a database made for 3D rendering, Functional analysis with the Rolex team, Business trip, Developpement of the core app, lead of a small team, Documentation, Code Review, Tool development (etc... interactive 3D visualization and builder)."]]
-    const text3 = [".03","Augment",["Augment", "3D Plugin & R&D for Virtual Reality/Augmented Reality, were my tasks. Augment is a 3D application for 3D Artist.Since Artists can use different software, I had to develop and maintain plugins for various 3D software, that was done in python mostly. Plus some virtual reality apps, using HTC Vive and Hololens, that was done in Unity3D/C# and Unreal/C++."]]
-    const text4 = [".04","Light-up",["Light-up Studio", "Full conception of Augmented reality instalations, Design, crafting direction, and software and software development, C++(OpenFrameWorks), most instalations were using kinect detection."]]
-    const text5 = [".05","Animation",["Animation", "Yohann Mepa In Animation, Working on Animations Projects"]]
+    const text1 = [".01","Tipsmeee", 
+    "Tipsmeee is a cloud web app in the Finetech industry, as a CTO, I had to build the project from scratch starting by the architecture of the project, the functional analysis, the documentation, the development, code review, and deployment on the cloud.Tipsmeee is as well embeded in other website.Tipsmeee is a Multilang Website, an Inboard module for more than 10 countries, each user has a dedicated payment page, it can handle more than 10 currencies, as a dasboard, it as a group feature for spread the money to multiple users and much more.",
+    '<iframe src="https://player.vimeo.com/video/481992024" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>']
+    
+    const text2 = [".02","FixStudio", 
+    "Pipeline Creation for Swatch rendering in 3D. Transform a database made for construction to a database made for 3D rendering, Functional analysis with the Rolex team, Business trip, Developpement of the core app, lead of a small team, Documentation, Code Review, Tool development (etc... interactive 3D visualization and builder).",
+    '<iframe src="https://player.vimeo.com/video/481991636" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>']
+    
+    const text3 = [".03","Augment", 
+    "3D Plugin & R&D for Virtual Reality/Augmented Reality, were my tasks. Augment is a 3D application for 3D Artist.Since Artists can use different software, I had to develop and maintain plugins for various 3D software, that was done in python mostly. Plus some virtual reality apps, using HTC Vive and Hololens, that was done in Unity3D/C# and Unreal/C++.",
+    '<iframe src="https://player.vimeo.com/video/481994923" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>']
+    const text4 = [".04","Light-up Studio", 
+    "Full conception of Augmented reality instalations, Design, crafting direction, and software and software development, C++(OpenFrameWorks), most instalations were using kinect detection.",
+    '<iframe src="https://player.vimeo.com/video/156682863" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>']
+    const text5 = [".05","Animation", 
+    "Yohann Mepa In Animation, Working on Animations Projects",
+    '<iframe src="https://player.vimeo.com/video/145055102" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>']
     let packs = [
         { text: text1, img: img1 },
         { text: text2, img: img2 },
@@ -40,7 +52,7 @@
         { text: text4, img: img4 },
         { text: text5, img: img5 },
     ];
-        const setMenu = (value, factor)=>{
+        const setMenu = (value,i, factor)=>{
       if(isOut){
         gsap.to(value, {scaleX: 1,scaleY: 1, duration: .3,ease: "sine",});
         objList.forEach(element => {
@@ -60,10 +72,23 @@
         gsap.to(value, {x: -130, scaleX:1, scaleY:1, duration: .5,ease: "sine", delay:.1, onComplete:()=>{isOut=true}});
       }
         UpdadeFace(2)
-        UpdateAnimation(value, "in")
+        console.log("VALUEEEE")
+        console.log(i)
+        let val;
+        if (i == 0)
+            {val = text1}
+        else if (i == 1)
+            {val = text2}
+        else if (i == 2)
+            {val = text3}
+        else if (i == 3)
+            {val = text4}
+        else if (i == 4)
+            {val = text5}
+        UpdateAnimation(val, "in")
     }
-  const moveAll = (value)=>{
-    setMenu(value, 'set')
+  const moveAll = (value,i)=>{
+    setMenu(value,i, 'set')
 
   }
   const resetMenu = (value)=>{
@@ -94,13 +119,11 @@ li
 <ol>
     {#each packs as { text, img }, i}
         <li bind:this={objList[i]}
-        on:click={()=>{moveAll(objList[i])}} 
+        on:click={()=>{moveAll(objList[i],i)}} 
         on:mouseenter={()=>{scaleMenu(objList[i],"up")}}
         on:mouseleave={()=>{scaleMenu(objList[i],"down")}}
         >
         <ListElement elt={objList[i]} {isOut} {text} {img}/>
-        <div class="description">
-        </div>
         </li>
     {/each}
 </ol>

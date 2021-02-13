@@ -1,11 +1,19 @@
 <script>
-export let elt;
+    export let elt;
 </script>
+<style lang="sass">
+.tittle
+    color: lightgrey
+    font-size: 30px
+    font-weight: 100
+</style>
 
-{elt}
-<iframe src="https://player.vimeo.com/video/481992024" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-
-
-
-tittle
-description
+{#if elt}
+    {@html elt[3]}
+    <br/>
+    <div class="tittle">
+    {elt[1]}
+    </div>
+    <br/>
+    {elt[2]}
+{/if}
