@@ -11,14 +11,25 @@
     let title;
     let desc;
     let el;
-    let elt
+    let elt;
+    let resetMenu = false;
     onMount(() => {
         createScene(el)
     });
 	function handleMessage(event) {
         gsap.to(desc, {x: -180,y:-140, scaleX:.8, scaleY:.8, opacity: 1, duration: .6,delay:.1, ease: "expo"});
         elt = event.detail.text
+        if(event.detail.close == true){
+            console.log("RESFSAGDSFHS");
+        resetMenu = false;
+
+        }
 	}
+    function closeDesc(){
+        resetMenu = true;
+        console.log("restetingg");
+        gsap.to(desc, {x: 180,y: 140, scaleX:1.2, scaleY:1.2, opacity: 0, duration: .3,delay:.1, ease: "expo"});
+    }
 </script>
 
 <style lang="sass">
@@ -82,9 +93,10 @@ section
   <div class="header">
 </div>
 <div class="projects">
-<Ol on:message={handleMessage}/>
+<Ol on:message={handleMessage} {resetMenu}/>
 <div class="desc" bind:this={desc}>
-   <div class="icon">
+   <div class="icon" on:click={closeDesc}>
+    
       <Icon data={timesCircle} scale="2"/>
     </div>
     <Description  {elt} />

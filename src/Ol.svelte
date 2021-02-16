@@ -5,6 +5,7 @@
     import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
+    export let resetMenu;
 
 	function UpdateAnimation(elt, inAndOut) {
         console.log("animation update")
@@ -20,7 +21,7 @@
     let third;
     let fourth;
     let fifth;
-    let objList = [first, second, third, fourth, fifth]
+    const objList = [first, second, third, fourth, fifth]
 
     const img1 = 'assets/img/tps.jpg';
     const img2 = 'assets/img/rolex.jpg';
@@ -52,28 +53,20 @@
         { text: text4, img: img4 },
         { text: text5, img: img5 },
     ];
-        const setMenu = (value,i, factor)=>{
-      if(isOut){
-        gsap.to(value, {scaleX: 1,scaleY: 1, duration: .3,ease: "sine",});
-        objList.forEach(element => {
-          gsap.to(element, {x: 0, y: 0, duration: .3,ease: "sine",onComplete:()=>{isOut=false}});
-        });
-        ;
-          UpdateAnimation(value, "out")
-      }
-      else{
-        const index = objList.indexOf(value);
-        if (index > -1) {
-            objList.splice(index, 1);
+    const setMenu = (value,i, factor)=>{
+        if(!isOut){
+            let index = objList.indexOf(value);
+            let newList = new Array(...objList);
+            if (index > -1) {
+               newList.splice(index, 1);
+            }
+            newList.forEach(element => {
+                gsap.to(element, {x: -200, opacity:0, duration: .4,ease: "sine",onComplete:()=>{isOut=true}});
+            });
+            gsap.to(value, {x: -130, scaleX:1, scaleY:1, duration: .5,ease: "sine", delay:.1, onComplete:()=>{isOut=true}});
         }
-        objList.forEach(element => {
-          gsap.to(element, {x: -200, opacity:0, duration: .4,ease: "sine",onComplete:()=>{isOut=true}});
-        });
-        gsap.to(value, {x: -130, scaleX:1, scaleY:1, duration: .5,ease: "sine", delay:.1, onComplete:()=>{isOut=true}});
-      }
-        UpdadeFace(2)
-        console.log("VALUEEEE")
-        console.log(i)
+            UpdadeFace(2)
+            
         let val;
         if (i == 0)
             {val = text1}
@@ -91,16 +84,24 @@
     setMenu(value,i, 'set')
 
   }
-  const resetMenu = (value)=>{
-    setMenu(value, 'unset')
-  }
+
   const scaleMenu = (val, fact)=>{
     let factor = (fact == "up" )? 1.2:1;
     if(!isOut){
       gsap.to(val, {scaleX:factor, scaleY:factor, duration: .3,ease: "sine"});
     }
   }
-
+console.log(resetMenu);
+$: if(resetMenu){
+    console.log('animated back')
+    console.log(objList)
+    objList.forEach(element => {
+        gsap.to(element, {x: 0, y: 0,opacity:1, duration: .3,ease: "sine",onComplete:()=>{isOut=false}});
+    });
+    dispatch('message', {
+			close: true
+		});
+}
 </script>
 <style lang="sass">
 ol
@@ -108,7 +109,6 @@ ol
     padding-bottom: -10%
 li
     list-style: none
-    font-family: 'Roboto'
     width: 35%
     z-index: -1
     // &:hover 
@@ -119,7 +119,7 @@ li
 <ol>
     {#each packs as { text, img }, i}
         <li bind:this={objList[i]}
-        on:click={()=>{moveAll(objList[i],i)}} 
+        on:click={()=>{moveAll(objList[i],i)}}
         on:mouseenter={()=>{scaleMenu(objList[i],"up")}}
         on:mouseleave={()=>{scaleMenu(objList[i],"down")}}
         >

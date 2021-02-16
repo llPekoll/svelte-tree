@@ -9,8 +9,9 @@
 </style>
 
 {#if elt}
+    <div class="text-center">
     {@html elt[3]}
-    <br/>
+    </div>
     <div class="tittle">
     {elt[1]}
     </div>
