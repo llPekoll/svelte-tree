@@ -80,6 +80,7 @@ section
     opacity: 0
     background-color: rgba(125,125 ,125 ,0.7 )
     padding: 20px
+    width: 640px
 .icon
     float: right
 .socials

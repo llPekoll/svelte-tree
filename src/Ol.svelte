@@ -93,6 +93,7 @@ $: if(resetMenu){
     objList.forEach(element => {
         gsap.to(element, {x: 0, y: 0,opacity:1, duration: .3,ease: "sine",onComplete:()=>{isOut=false}});
     });
+    UpdadeFace(0)
     dispatch('message', {
 			close: true
 		});

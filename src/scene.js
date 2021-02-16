@@ -15,7 +15,7 @@ const pekoTexture = 'assets/text_low.jpg';
 
 // Fog
 const color = 0x333333;  // white
-const near = 6;
+const near = 5;
 const far = 12;
 scene.fog = new THREE.Fog(color, near, far);
 scene.background = new THREE.Color(color);
@@ -36,10 +36,64 @@ const sphereSize = 1;
 const pointLightHelper = new THREE.PointLightHelper( light, sphereSize );
 // scene.add( pointLightHelper );
 
+
+
+let material;
+const geometry = new THREE.BufferGeometry();
+const vertices = [];
+
+const sprite = new THREE.TextureLoader().load( 'assets/po.png' );
+
+				for ( let i = 0; i < 100; i ++ ) {
+
+					const x = 30 * Math.random() - 5;
+					const y = 10 * Math.random() - 5;
+					const z = 30 * Math.random() - 5;
+
+					vertices.push( x, y, z );
+
+				}
+
+geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+let parameters = [
+    [[ 1.0, 0.2, 0.5 ], sprite, 0.1 ],
+    [[ 0.95, 0.1, 0.5 ], sprite, 0.2 ],
+    [[ 0.90, 0.05, 0.5 ], sprite, 0.3 ],
+    [[ 0.85, 0, 0.5 ], sprite, 0.3 ],
+    [[ 0.80, 0, 0.5 ], sprite, 0.3 ]
+];
+let materials=[];
+for ( let i = 0; i < parameters.length; i ++ ) {
+
+    const color = parameters[ i ][ 0 ];
+    const sprite = parameters[ i ][ 1 ];
+    const size = parameters[ i ][ 2 ];
+
+    materials[ i ] = new THREE.PointsMaterial( { size: size, map: sprite, blending: THREE.AdditiveBlending, depthTest: false, transparent: true } );
+    materials[ i ].color.setHSL( color[ 0 ], color[ 1 ], color[ 2 ] );
+
+    const particles = new THREE.Points( geometry, materials[ i ] );
+
+    particles.rotation.x = Math.random() * 6;
+    particles.rotation.y = Math.random() * 6;
+    particles.rotation.z = Math.random() * 6;
+
+    scene.add( particles );
+
+}
+
+
+const time = Date.now() * 0.00005;
 const animate = () => {
 	light.position.x = 80 * Math.sin(-Date.now() / 500)-10;
 	light.position.z = 80 * Math.cos(-Date.now() / 500)-10;
   	requestAnimationFrame(animate);
+    //   for ( let i = 0; i < scene.children.length; i ++ ) {
+    //     const object = scene.children[ i ];
+    //     if ( object instanceof THREE.Points ) {
+    //         object.position.y = time * ( i < 4 ? i + 10 : - ( i + 10 ) );
+    //     }
+    // }
   	renderer.render(scene, camera);
 };
 
@@ -89,10 +143,16 @@ export const createScene = (el) => {
 }
 export const UpdadeFace = (num) => {
 	var pp = scene.getObjectByName( "peko", true );
-	gsap.to(pp.rotation, {y: -0.5,z:0.3, duration: 1,ease: "sine"});
-	gsap.to(pp.position, {y: -1,x:-1, duration: 1,ease: "sine"});
+	if(num == 0){
+		gsap.to(pp.rotation, {y: 0,z:0, duration: 1,ease: "sine"});
+		gsap.to(pp.position, {y: 0,x:0, duration: 1,ease: "sine"});
+	}
+	else{
+		gsap.to(pp.rotation, {y: -0.5,z:0.3, duration: 1,ease: "sine"});
+		gsap.to(pp.position, {y: -1,x:-1, duration: 1,ease: "sine"});
+	}
+	}
 
-}
 
 
 window.addEventListener('resize', resize);
