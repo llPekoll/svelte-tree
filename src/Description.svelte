@@ -1,13 +1,14 @@
 <script>
     export let elt;
 </script>
+
 <style lang="sass">
 .tittle
     color: lightgrey
     font-size: 30px
     font-weight: 100
-
 </style>
+
 <section>
     {#if elt}
         <div class="tittle">

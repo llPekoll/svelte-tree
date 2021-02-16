@@ -31,8 +31,6 @@
 
 
 <style lang="sass">
-    span 
-        font-size: 20px
     .header 
         color: #ff3e00
         height: 10px

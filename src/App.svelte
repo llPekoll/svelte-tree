@@ -5,7 +5,7 @@
     import Description from './Description.svelte'
     import {gsap} from 'gsap';
     import Icon from 'svelte-awesome';
-    import { timesCircle,github,githubSquare,githubAlt,linkedin,linkedinSquare,twitter, twitterSquare } from 'svelte-awesome/icons';
+    import { timesCircle,githubAlt,linkedin,twitter } from 'svelte-awesome/icons';
 
     const title_content = "|<br/>|Mepa <br/> |Yohann";
     let title;
@@ -13,7 +13,7 @@
     let el;
     let elt;
     let resetMenu = false;
-    let icon;
+
     onMount(() => {
         createScene(el)
     });
@@ -24,9 +24,9 @@
         resetMenu = false;
         }
     }
+
     function closeDesc(){
         resetMenu = true;
-        // gsap.to(desc, {x: 180,y: 140, scaleX:0, scaleY:0, opacity: 0, duration: .3, ease: "expo"});
     }
 </script>
 
@@ -41,11 +41,7 @@
     top: 9% 
     width: 200px 
     height: 100px 
-ol
-    list-style-type: none
-    width: 230px
-li
-    height: 70px
+
 .header
     position: absolute 
     left: 0 

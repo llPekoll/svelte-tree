@@ -4,14 +4,14 @@
     import {gsap} from 'gsap';
     import { createEventDispatcher } from 'svelte';
 
-	const dispatch = createEventDispatcher();
+    const dispatch = createEventDispatcher();
     export let resetMenu;
 
-	function UpdateAnimation(elt, inAndOut) {
-		dispatch('message', {
-			text: elt
-		});
-	}
+    function UpdateAnimation(elt, inAndOut) {
+        dispatch('message', {
+            text: elt
+        });
+    }
 
     let isOut =false;
     let first;
@@ -38,9 +38,11 @@
     const text3 = [".03","Augment", 
     "3D Plugin & R&D for Virtual Reality/Augmented Reality, were my tasks. Augment is a 3D application for 3D Artist.Since Artists can use different software, I had to develop and maintain plugins for various 3D software, that was done in python mostly. Plus some virtual reality apps, using HTC Vive and Hololens, that was done in Unity3D/C# and Unreal/C++.",
     '<iframe src="https://player.vimeo.com/video/481994923" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>']
+
     const text4 = [".04","Light-up", 
     "Full conception of Augmented reality instalations, Design, crafting direction, and software and software development, C++(OpenFrameWorks), most instalations were using kinect detection.",
     '<iframe src="https://player.vimeo.com/video/156682863" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>']
+
     const text5 = [".05","Animation", 
     "Yohann Mepa In Animation, Working on Animations Projects",
     '<iframe src="https://player.vimeo.com/video/145055102" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>']
@@ -80,7 +82,6 @@
     }
   const moveAll = (value,i)=>{
     setMenu(value,i, 'set')
-
   }
 
   const scaleMenu = (val, fact)=>{
@@ -95,8 +96,8 @@ $: if(resetMenu){
     });
     UpdadeFace(0)
     dispatch('message', {
-			close: true
-		});
+    close: true
+    });
 }
 </script>
 <style lang="sass">
@@ -119,7 +120,7 @@ li
         on:mouseenter={()=>{scaleMenu(objList[i],"up")}}
         on:mouseleave={()=>{scaleMenu(objList[i],"down")}}
         >
-        <ListElement elt={objList[i]} {isOut} {text} {img}/>
+        <ListElement elt={objList[i]} {text} {img}/>
         </li>
     {/each}
 </ol>
