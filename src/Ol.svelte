@@ -8,8 +8,6 @@
     export let resetMenu;
 
 	function UpdateAnimation(elt, inAndOut) {
-        console.log("animation update")
-        console.log(elt)
 		dispatch('message', {
 			text: elt
 		});
@@ -40,7 +38,7 @@
     const text3 = [".03","Augment", 
     "3D Plugin & R&D for Virtual Reality/Augmented Reality, were my tasks. Augment is a 3D application for 3D Artist.Since Artists can use different software, I had to develop and maintain plugins for various 3D software, that was done in python mostly. Plus some virtual reality apps, using HTC Vive and Hololens, that was done in Unity3D/C# and Unreal/C++.",
     '<iframe src="https://player.vimeo.com/video/481994923" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>']
-    const text4 = [".04","Light-up Studio", 
+    const text4 = [".04","Light-up", 
     "Full conception of Augmented reality instalations, Design, crafting direction, and software and software development, C++(OpenFrameWorks), most instalations were using kinect detection.",
     '<iframe src="https://player.vimeo.com/video/156682863" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>']
     const text5 = [".05","Animation", 
@@ -91,10 +89,7 @@
       gsap.to(val, {scaleX:factor, scaleY:factor, duration: .3,ease: "sine"});
     }
   }
-console.log(resetMenu);
 $: if(resetMenu){
-    console.log('animated back')
-    console.log(objList)
     objList.forEach(element => {
         gsap.to(element, {x: 0, y: 0,opacity:1, duration: .3,ease: "sine",onComplete:()=>{isOut=false}});
     });

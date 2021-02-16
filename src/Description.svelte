@@ -6,15 +6,17 @@
     color: lightgrey
     font-size: 30px
     font-weight: 100
-</style>
 
-{#if elt}
-    <div class="text-center">
-    {@html elt[3]}
-    </div>
-    <div class="tittle">
-    {elt[1]}
-    </div>
-    <br/>
-    {elt[2]}
-{/if}
+</style>
+<section>
+    {#if elt}
+        <div class="tittle">
+        {elt[1]}
+        </div>
+        <div class="text-center">
+        {@html elt[3]}
+        </div>
+        <br/>
+        {elt[2]}
+    {/if}
+</section>

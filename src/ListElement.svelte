@@ -16,7 +16,6 @@
     top: 30%
 
 .box
-    background-color: red
     height: 55px
     width: 120px
     margin-right: 10px

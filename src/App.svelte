@@ -5,7 +5,7 @@
     import Description from './Description.svelte'
     import {gsap} from 'gsap';
     import Icon from 'svelte-awesome';
-    import { timesCircle } from 'svelte-awesome/icons';
+    import { timesCircle,github,githubSquare,githubAlt,linkedin,linkedinSquare,twitter, twitterSquare } from 'svelte-awesome/icons';
 
     const title_content = "|<br/>|Mepa <br/> |Yohann";
     let title;
@@ -13,6 +13,7 @@
     let el;
     let elt;
     let resetMenu = false;
+    let icon;
     onMount(() => {
         createScene(el)
     });
@@ -20,15 +21,12 @@
         gsap.to(desc, {x: -180,y:-140, scaleX:.8, scaleY:.8, opacity: 1, duration: .6,delay:.1, ease: "expo"});
         elt = event.detail.text
         if(event.detail.close == true){
-            console.log("RESFSAGDSFHS");
         resetMenu = false;
-
         }
-	}
+    }
     function closeDesc(){
         resetMenu = true;
-        console.log("restetingg");
-        gsap.to(desc, {x: 180,y: 140, scaleX:1.2, scaleY:1.2, opacity: 0, duration: .3,delay:.1, ease: "expo"});
+        // gsap.to(desc, {x: 180,y: 140, scaleX:0, scaleY:0, opacity: 0, duration: .3, ease: "expo"});
     }
 </script>
 
@@ -48,7 +46,6 @@ ol
     width: 230px
 li
     height: 70px
-    background-color: red
 .header
     position: absolute 
     left: 0 
@@ -58,7 +55,8 @@ li
     background-color: rgba(0,0,0,0.7)
 .footer
     text-align: center
-    padding-top: 30px
+    padding-top: 10px
+    padding-bottom: 10px
     color: lightgrey
     position: absolute 
     left: 0 
@@ -80,11 +78,16 @@ section
     top: 176px
     left: 400px
     opacity: 0
-
+    background-color: rgba(125,125 ,125 ,0.7 )
+    padding: 20px
 .icon
     float: right
+.socials
+    margin-right: 5%
+    display: inline
+a
+    color: grey
 </style>
-
 
 <section>
   <div bind:this={title} class="title">
@@ -94,16 +97,32 @@ section
 </div>
 <div class="projects">
 <Ol on:message={handleMessage} {resetMenu}/>
+{#if !resetMenu}
 <div class="desc" bind:this={desc}>
-   <div class="icon" on:click={closeDesc}>
-    
-      <Icon data={timesCircle} scale="2"/>
+    <div class="icon" on:click={closeDesc}>
+        <Icon data={timesCircle} scale="2"/>
+        </div>
+        <Description  {elt} />
     </div>
-    <Description  {elt} />
-</div>
+{/if }
 </div>
 <div class="footer">
-Mepa Yohann all right reserved
+    <div class="socials">
+    <a href="https://github.com/llPekoll/">
+        <Icon data={githubAlt} scale="2"/>
+    </a>
+    </div>
+    <div class="socials">
+    <a href="https://www.linkedin.com/in/yohann-mepa-69015073/">
+    <Icon data={linkedin} scale="2"/>
+    </a>
+    </div>
+    <div class="socials">
+    <a href="https://twitter.com/llpekoll/">
+    <Icon data={twitter} scale="2"/>
+    </a>
+    </div>
+    
 </div>
 </section>
 <canvas bind:this={el}></canvas>

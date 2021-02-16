@@ -1,8 +1,6 @@
 <script>
     export let text;
     export let show;
-    console.log(show)
-    console.log(typeof show)
 
     function swipe(node){
         return{
