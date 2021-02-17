@@ -102,14 +102,14 @@ $: if(resetMenu){
 </script>
 <style lang="sass">
 ol
-    padding-top: 10%
+    padding-top: 0px
+    margin-top: 0px
     padding-bottom: -10%
+    padding-left: 0px
 li
     list-style: none
-    width: 35%
+    width: 235px
     z-index: -1
-    // &:hover 
-    //     background-color: yellow
 
 </style>
 

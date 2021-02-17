@@ -24,13 +24,14 @@
         resetMenu = false;
         }
     }
-
     function closeDesc(){
         resetMenu = true;
     }
 </script>
 
 <style lang="sass">
+$small: 500px
+$medium: 700px
 .title
     font-size: 44px
     font-weight: 100
@@ -67,8 +68,9 @@ section
     width: 100%
     z-index: 1
 .projects
-    margin-top: 120px
-    margin-left: 120px
+    position: absolute
+    left: 15%
+    top: 26%
 .desc
     position: absolute
     top: 176px
@@ -84,14 +86,24 @@ section
     display: inline
 a
     color: grey
+
+@media screen and (max-width: $small) 
+    a
+        color: green
+
+@media screen and (max-width: $medium) 
+    a
+        color: green
+
+
 </style>
 
 <section>
+  <div class="header">
+</div>
   <div bind:this={title} class="title">
       {@html title_content}
   </div>
-  <div class="header">
-</div>
 <div class="projects">
 <Ol on:message={handleMessage} {resetMenu}/>
 {#if !resetMenu}
