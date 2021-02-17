@@ -32,13 +32,7 @@ scene.add( light2 );
 
 let renderer;
 
-const sphereSize = 1;
-const pointLightHelper = new THREE.PointLightHelper( light, sphereSize );
-// scene.add( pointLightHelper );
 
-
-
-let material;
 const geometry = new THREE.BufferGeometry();
 const vertices = [];
 
@@ -88,13 +82,7 @@ const animate = () => {
 	light.position.x = 80 * Math.sin(-Date.now() / 500)-10;
 	light.position.z = 80 * Math.cos(-Date.now() / 500)-10;
   	requestAnimationFrame(animate);
-    //   for ( let i = 0; i < scene.children.length; i ++ ) {
-    //     const object = scene.children[ i ];
-    //     if ( object instanceof THREE.Points ) {
-    //         object.position.y = time * ( i < 4 ? i + 10 : - ( i + 10 ) );
-    //     }
-    // }
-  	renderer.render(scene, camera);
+    renderer.render(scene, camera);
 };
 
 
@@ -114,19 +102,17 @@ loader.load(
 		gltf.scenes; // Array<THREE.Group>
 		gltf.cameras; // Array<THREE.Camera>
 		gltf.asset; // Object
-
 		gltf.scene.children[0].name = "peko";
 		gltf.scene.children[0].children[0].material = pekoMat;
 		gltf.scene.children[0].children[0].position.set(0.087, -0.131, 0.000);
 		gltf.scene.children[0].children[0].rotation.set(-.7,0.6,0);
-
 	},
-	function ( xhr ) {
-		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-	},
-	function ( error ) {
-		console.log( 'An error happened' );
-	}
+	// function ( xhr ) {
+	// 	console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+	// },
+	// function ( error ) {
+	// 	console.log( 'An error happened' );
+	// }
 );
 
 
@@ -151,9 +137,7 @@ export const UpdadeFace = (num) => {
 		gsap.to(pp.rotation, {y: -0.5,z:0.3, duration: 1,ease: "sine"});
 		gsap.to(pp.position, {y: -1,x:-1, duration: 1,ease: "sine"});
 	}
-	}
-
-
+}
 
 window.addEventListener('resize', resize);
 

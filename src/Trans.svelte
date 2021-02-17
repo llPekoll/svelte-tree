@@ -29,7 +29,6 @@
     </div>
 {/if}
 
-
 <style lang="sass">
     .header 
         color: #ff3e00

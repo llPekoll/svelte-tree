@@ -1,6 +1,6 @@
 <script>
     import ListElement from './ListElement.svelte'
-    import {  UpdadeFace } from "./scene";
+    import { UpdadeFace } from "./scene";
     import {gsap} from 'gsap';
     import { createEventDispatcher } from 'svelte';
 

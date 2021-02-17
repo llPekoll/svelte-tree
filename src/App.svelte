@@ -18,7 +18,7 @@
         createScene(el)
     });
 	function handleMessage(event) {
-        gsap.to(desc, {x: -180,y:-140, scaleX:.8, scaleY:.8, opacity: 1, duration: .6,delay:.1, ease: "expo"});
+        gsap.to(desc, {x: -300,y:-250, scaleX:.8, scaleY:.8, opacity: 1, duration: .6,delay:.1, ease: "expo"});
         elt = event.detail.text
         if(event.detail.close == true){
         resetMenu = false;
@@ -67,6 +67,8 @@ section
     height: 100%
     width: 100%
     z-index: 1
+    overflow: hidden
+
 .projects
     position: absolute
     left: 15%
@@ -90,20 +92,27 @@ a
 @media screen and (max-width: $small) 
     a
         color: green
+    .desc
+        zoom: 0.5
+        -moz-transform: scale(0.5)
+        margin-left: -200px
 
 @media screen and (max-width: $medium) 
     a
         color: green
-
+    .desc
+        zoom: 0.5
+        -moz-transform: scale(0.5)
+        margin-left: -200px
 
 </style>
 
 <section>
-  <div class="header">
+<div class="header">
 </div>
-  <div bind:this={title} class="title">
-      {@html title_content}
-  </div>
+<div bind:this={title} class="title">
+    {@html title_content}
+</div>
 <div class="projects">
 <Ol on:message={handleMessage} {resetMenu}/>
 {#if !resetMenu}
@@ -131,7 +140,6 @@ a
     <Icon data={twitter} scale="2"/>
     </a>
     </div>
-    
 </div>
 </section>
 <canvas bind:this={el}></canvas>

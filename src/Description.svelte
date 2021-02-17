@@ -8,7 +8,6 @@
     font-size: 30px
     font-weight: 100
 </style>
-
 <section>
     {#if elt}
         <div class="tittle">
